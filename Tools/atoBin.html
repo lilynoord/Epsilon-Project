@@ -1,0 +1,88 @@
+<style>
+.t {
+color:white;
+background-color: black;
+}
+</style> 
+<h3 class="t">ABC=01010101</h3>
+<div>
+<script>
+let alphabetCaps = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9","10","11","12","11","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
+let alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+function atob() {  
+    
+    var phrase = document.getElementById("phrase").value;
+    phrase = phrase.split("");
+    let decrypt = "";
+    len = phrase.len;
+    for (let x in phrase){
+        l = phrase[x].toUpperCase();
+        
+            l = l.charCodeAt();
+        
+        
+        decrypt += getBinary(l).toString()+" ";
+        }
+    document.getElementById("decrypted").innerText = decrypt; 
+        return false;
+
+}
+
+function getBinary(n,r=[],i=0){
+    q = Math.trunc(n/2);
+    r.push(n%2); 
+    if (q>0){
+        return getBinary(q,r,i+=1);
+    } else {
+        bin = "";
+        while(i<7){
+            i++;
+            r.push(0);
+        }
+        while(i>=0){
+            i--;
+            bin += r.pop().toString();
+        }
+        return bin;
+    }
+    
+
+}
+
+function btoa(){
+    var phrase = document.getElementById("phrase").value;
+    phrase = phrase.split(" ");
+    let decrypt = "";
+    for (let p in phrase){
+        n = phrase[p];
+        x = 0;
+        for (let i in n){            
+            x = (x*2)+Number(n[i]);
+            
+        }
+        
+        decrypt += String.fromCharCode(x);
+        }
+    document.getElementById("decrypted").innerText = decrypt; 
+        return false;
+}
+</script> 
+
+<div style="display:flex;align-items: left">
+<input type="text" id="phrase" name="phrase">
+</div>
+<div style="display:flex;align-items: left">
+<form style="margin:0px 1px;"onsubmit="return atob();" class="my-form">
+    <input  type="submit" value=">01010101">
+</form>
+<form onsubmit="return btoa();" class="my-form">
+    <input type="submit" value=">ABC">
+</form>
+
+</form>
+</div>
+<p class="t" id="decrypted"></p>
+</div>
+
+

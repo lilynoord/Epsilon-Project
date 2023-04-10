@@ -1,0 +1,765 @@
+<style>
+.divcentertxt {margin:auto;vertical-align: middle;display: flex;justify-content: left;align-items: center;background-color:black;padding:10px 10px}
+.divLeft{
+    background-color:black;
+}
+.divcenter {z-index:9;margin:auto;vertical-align: middle;display: flex;justify-content: center;align-items: center; padding:2px 2px;transition-duration: 1s;background-color:black;}
+.divhide {z-index:1;opacity:0;transition-duration:1s;margin:auto;vertical-align: middle;display: flex;justify-content: center;align-items: center;height:0px;width:0px}
+.divhidetxt {opacity:0;transition-duration:1s;margin:auto;vertical-align: middle;display: flex;justify-content: left;align-items: center;}
+.input{z-index:20;margin:auto;opacity:1;transition-duration:1s}
+.invis{z-index:1;margin:-10px -10px;opacity:0;transition-duration:0.5s}
+.hidetext {font-family:"Courier New", monospace;opacity:0;transition-duration:1s;height:0px;} 
+.txt1 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;transition-duration: 1s;justify-self: left;}
+.glitch1 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-style: italic;}
+.glitch2 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-stretch: ultra-condensed;}
+.glitch3 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-stretch: ultra-expanded ;} 
+.glitch4 {margin:1px 1px;opacity:1;color:rgba(255, 0, 191, 0.384);font-family:"Courier New", monospace;}
+.glitch5 {margin:1px 1px;opacity:1;color:white;font-family:"OCR A Std", monospace}
+.txtBig {margin:auto;opacity:1;color:white;font-family:"Courier New", monospace;transition-duration: 0.8s;font-size:80px}
+.blink0 {margin:auto;background-color: #383838;border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 1s;cursor: pointer;opacity:.8;}
+.blink1 {margin:auto;background-color: #383838;border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 0.3s;cursor: pointer;opacity:.8;}
+.blink2 {margin:auto;background-color: #d60012;box-shadow: 0 0px 16px 0 rgba(200,0,0,0.6), 0 6px 20px 0 rgba(200,0,0,0.58);border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 0.3s;cursor: pointer;}
+.blinkhide{margin:auto;background-color: #383838;box-shadow: 0 0px 16px 0 rgba(200,0,0,0.6), 0 6px 20px 0 rgba(200,0,0,0.58);border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 2s;cursor: pointer;opacity:0}
+.consoleButton {z-index:12;background-color: black;color:white;opacity:1;
+}
+.offLight {
+    margin:auto;
+    background-color: #2d2d2d;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+}
+.onLightTest {
+    margin:auto;
+    background-color: #ffd220de;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+    box-shadow: 0 0px 10px 0 #ffcc0081, 0 0px 15px 0 #ffcc0028;
+}
+.onLightGood {
+    margin:auto;
+    background-color: #2afe7bdd;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+    box-shadow: 0 0px 15px 0 #3cff00b5, 0 0px 20px 0 #00ff1128;
+}
+.onLightBad {
+    margin:auto;
+    background-color: #fe2a2ac9;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+    box-shadow: 0 0px 10px 0 #ff000079, 0 0px 15px 0 #ff000043;
+}
+.baseLight {margin:12px;background-color: #000000;height:10px;width:300px; transition-duration: 5s;}
+.baseLight1 {margin:12px;background-color: #000000;height:10px;width:300px; transition-duration: 5s;}
+.baseLight2 {margin:12px;background-color: #000000;height:10px;width:300px; transition-duration: 5s;}
+.baseLight3 {margin:12px;background-color: #000000;height:10px;width:300px; transition-duration: 5s;}
+.baseLight4 {margin:12px;background-color: #000000;height:10px;width:300px; transition-duration: 5s;}
+.baseLight5 {margin:12px;background-color: #000000;height:10px;width:300px; transition-duration: 5s;}
+.baseLight6 {margin:12px;background-color: #000000;height:10px;width:300px; transition-duration: 5s;}
+
+.baseLight1:active {margin:12px;background-color: #000000;height:10px;width:300px; background-image: linear-gradient(90deg,red,green);transition-duration: 5s;}
+.baseLight2:active {margin:12px;background-color: #000000;height:10px;width:300px; background-image: linear-gradient(90deg,orange,white);transition-duration: 5s;}
+.baseLight3:active {margin:12px;background-color: #000000;height:10px;width:300px; background-image: linear-gradient(90deg,purple,orange);transition-duration: 5s;}
+.baseLight4:active {margin:12px;background-color: #000000;height:10px;width:300px; background-image: linear-gradient(90deg,green,blue);transition-duration: 5s;}
+.baseLight5:active {margin:12px;background-color: #000000;height:10px;width:300px; background-image: linear-gradient(90deg,blue,purple);transition-duration: 5s;}
+.baseLight6:active {margin:12px;background-color: #000000;height:10px;width:300px; background-image: linear-gradient(90deg,white,red);transition-duration: 5s;}
+
+.testLightOff {
+    margin:auto;
+    background-color: #2d2d2d;border: 1px solid grey;padding:30px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+}
+.testLightRed {
+    margin:auto;
+    background-color: #cf0000;border: 1px solid grey;padding:30px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+    box-shadow: 0 0px 30px 0 rgba(240, 0, 0, 0.6), 0 6px 30px 0 rgba(255, 0, 0, 0.58);
+}
+.testLightYellow {
+    margin:auto;
+    background-color: #cf9f00;border: 1px solid grey;padding:30px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+    box-shadow: 0 0px 30px 0 rgba(240, 172, 0, 0.6), 0 6px 30px 0 rgba(255, 200, 0, 0.58);
+}
+.testLightGreen {
+    margin:auto;
+    background-color: #2af41c;border: 1px solid grey;padding:30px;border-radius: 50%;transition-duration: 1s;cursor: pointer;
+    box-shadow: 0 0px 30px 0 rgba(56, 240, 0, 0.6), 0 6px 30px 0 rgba(21, 255, 0, 0.58);
+}
+
+.lightRed {margin:auto;background-color: red;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 6px 0 rgba(255, 0, 0, 0.4),0 0px 10px 0 rgba(255, 0, 0, 0.3);cursor:pointer}
+.lightOrange {margin:auto;background-color: orange;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 6px 0 rgba(255, 166, 0, 0.4), 0 0px 10px 0 rgba(255, 166, 0, 0.3);cursor:pointer} 
+.lightPurple {margin:auto;background-color: purple;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 6px 0 rgba(128, 0, 128, 0.4), 0 0px 10px 0 rgba(128, 0, 128, 0.3);cursor:pointer}
+.lightGreen {margin:auto;background-color: green;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 6px 0 rgba(0, 128, 0, 0.4), 0 0px 10px 0 rgba(0, 128, 0, 0.3);cursor:pointer}
+.lightBlue {margin:auto;background-color: blue;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 6px 0 rgba(0, 0, 255, 0.4), 0 0px 10px 0 rgba(0, 0, 255, 0.3);cursor:pointer}
+.lightWhite {margin:auto;background-color: white;border: 1px solid grey;padding:10px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 6px 0 rgba(255, 255, 255, 0.4), 0 0px 10px 0 rgba(255, 255, 255, 0.3);cursor:pointer}
+
+.keyLightRed {margin:auto;background-color: red;border: 1px solid grey;padding:25px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 30px 0 rgba(255, 0, 0, 0.4), 0 6px 30px 0 rgba(255, 0, 0, 0.3);}
+.keyLightOrange {margin:auto;background-color: orange;border: 1px solid grey;padding:25px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 30px 0 rgba(255, 166, 0, 0.4), 0 6px 30px 0 rgba(255, 166, 0, 0.3);}
+.keyLightPurple {margin:auto;background-color: purple;border: 1px solid grey;padding:25px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 30px 0 rgba(128, 0, 128, 0.4), 0 6px 30px 0 rgba(128, 0, 128, 0.3);}
+.keyLightGreen {margin:auto;background-color: green;border: 1px solid grey;padding:25px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 30px 0 rgba(0, 128, 0, 0.4), 0 6px 30px 0 rgba(0, 128, 0, 0.3);}
+.keyLightBlue {margin:auto;background-color: blue;border: 1px solid grey;padding:25px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 30px 0 rgba(0, 0, 255, 0.4), 0 6px 30px 0 rgba(0, 0, 255, 0.3);}
+.keyLightWhite {margin:auto;background-color: white;border: 1px solid grey;padding:25px;border-radius: 50%;transition-duration: 1s;cursor: pointer;box-shadow: 0 0px 30px 0 rgba(255, 255, 255, 0.4), 0 6px 30px 0 rgba(255, 255, 255, 0.3);}
+
+.panelLeft1 {
+    border:  solid 1px #ffffff;
+    width:600px;
+    height:375px;
+    background-image: radial-gradient(rgb(122, 119, 109),rgba(121, 121, 121, 0.272));
+    border-radius: 1%;
+    
+}
+.panelLeft2 {
+    border:  solid 1px #ffffff;
+    width:412px;
+    height:36px;
+    background-image: radial-gradient(rgb(122, 119, 109),rgba(121, 121, 121, 0.272));
+    border-radius: 2%;
+    margin:5px 10px;
+    display:flex;
+}
+.panelLeft2-1 {
+    width:412px;
+    height:12px;
+    border-radius: 2%;
+    margin:5px 10px;
+    display:flex;
+    justify-content:right;
+    align-items: center;
+    text-shadow: 0.5px 0.5px 0.5px black;
+}
+.writing {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9px;
+    color: silver;
+    margin: 1px;
+
+}
+.panelLeftConnectors {
+    border:  solid 1px #ffffff;
+    height:280px;
+    background-image: radial-gradient(rgb(122, 119, 109),rgba(121, 121, 121, 0.272));
+    border-radius: 2%;
+    margin:5px 0px;
+    margin-left: 5px;
+    
+}
+.panelLeftUpper{
+    height:300px;
+    margin:1.5px;
+    display:flex;
+    
+}
+.panelLeft3 {
+    border:  solid 1px #ffffff;
+    width:75%;
+    height:30%;
+    background-image: radial-gradient(rgb(122, 119, 109),rgba(121, 121, 121, 0.272));
+    border-radius: 2%;
+    margin:19.5px 16.5px;
+    padding:1.5px;
+    display:flex;
+    text-shadow: 0.5px 0.5px 0.5px black;
+
+}
+
+.panelLeft4 {
+    width:99%;
+    height:99%;
+}
+.panelLeft5{
+    width:150px;
+    margin:10px 25px;
+    border:  solid 1px #ffffff;
+}
+.panelRight5{
+    width:150px;
+    margin:10px 250px;
+    border:  solid 1px #ffffff;
+}
+.closeButton {
+    width:150px;
+    height:40px;
+    margin:auto;
+    background-image: radial-gradient(rgba(156, 156, 156, 0.537),rgba(0, 0, 0, 0.808));
+    color:rgb(201, 201, 201);
+    font-family:sans-serif;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px black;
+}
+.closeButton:active {
+    width:150px;
+    height:40px;
+    margin:auto;
+    background-image: radial-gradient(rgba(156, 156, 156, 0.537),rgba(0, 0, 0, 0.808));
+    color:rgb(201, 201, 201);
+    font-family:sans-serif;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px black;
+    transform: translateY(1px);
+
+}
+.openButton {
+    width:150px;
+    height:40px;
+    margin:auto;
+    background-image: radial-gradient(rgba(156, 156, 156, 0.537),rgba(0, 0, 0, 0.808));
+    color:rgb(201, 201, 201);
+    font-family:sans-serif;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px black;
+}
+.openButton:active {
+    width:150px;
+    height:40px;
+    margin:auto;
+    background-image: radial-gradient(rgba(156, 156, 156, 0.537),rgba(0, 0, 0, 0.808));
+    transform: translateY(1px);
+    color:rgb(201, 201, 201);
+    font-family:sans-serif;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px black;
+    transform: translateY(1px);
+
+}
+.testButton{
+    margin:auto;
+    width:90%;
+    height:90%;
+    background-image: repeating-linear-gradient(-45deg,red, orange 10%, yellow 10%);
+    color:whitesmoke;
+    font-family:sans-serif;
+    font-size: 30px;
+    text-shadow: 2px 1px 1px black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    z-index:10;
+    cursor:pointer;
+}
+
+.testButton:active {
+    margin:auto;
+    width:90%;
+    height:90%;
+    background-image: repeating-linear-gradient(-45deg,red, orange 10%, yellow 10%);
+    color:black;
+    font-family:sans-serif;
+    font-size: 30px;
+    text-shadow: 2px 1px 1px white;
+    transform: translateY(1px);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+.master {
+    padding-right: 0%;
+    background-color: black;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.buttonHide {
+    cursor:none;
+}
+</style>
+<div class="divLeft"><button id = "showConsole" class="consoleButton">Console</button>
+    <button id = "textSpeed" class="consoleButton">Faster</button>
+</div>
+<div class="divcenter" id="divCode">
+    <input class="input" type="text" id="code" name="code">
+</div>
+<div></div>
+<div class="divcenter" id="divEnter">
+    <form onsubmit="return input();"><input class="input" type="submit" id="enter" value="X"></form>
+</div>
+<div class="divhide" id="1">
+    <button class="invis" id="blinker"></button>
+</div>  
+<div class="master"id="MasterDiv">
+    <div class="divcentertxt" id="console">
+        <p class="hidetxt" id="msg"></p>
+    </div>
+    
+<div class="divcenter" id="leftright">
+    <div id="Left">
+        
+
+        <div class="divhide" id="2"></div>
+        <div class="divhide" id="3">
+            <div class="panelLeft1" id="leftPanel">
+                <div class="panelLeftUpper">
+                <div class="panelLeftConnectors">
+                
+                <div class="panelLeft2" id ="leftPanelMini1">
+                    <button id="A1" class="offLight"></button>
+                    <button class="baseLight1"></button>
+                    <button id="A2" class="offLight"></button>
+                </div>
+                <div class="panelLeft2" id ="leftPanelMini2">
+                    <button id="B1" class="offLight"></button>
+                    <button class="baseLight2"></button>
+                    <button id="B2" class="offLight"></button>
+                </div>
+                <div class="panelLeft2" id ="leftPanelMini3">
+                    <button id="C1" class="offLight"></button>
+                    <button class="baseLight3"></button>
+                    <button id="C2" class="offLight"></button>
+                </div>
+                <div class="panelLeft2" id ="leftPanelMini4">
+                    <button id="D1" class="offLight"></button>
+                    <button class="baseLight4"></button>
+                    <button id="D2" class="offLight"></button>
+                </div>
+                <div class="panelLeft2" id ="leftPanelMini5">
+                    <button id="E1" class="offLight"></button>
+                    <button class="baseLight5"></button>
+                    <button id="E2" class="offLight"></button>
+                </div>
+                <div class="panelLeft2" id ="leftPanelMini6">
+                    <button id="F1" class="offLight"></button>
+                    <button class="baseLight6"></button>
+                    <button id="F2" class="offLight"></button>
+                </div>
+                </div>
+            <div class="panelLeft4">
+                <div class="panelLeft3" id="testLightPanel">
+                    <button id="testLight" class="testLightOff"></button>
+                </div>
+                <div style="height:22px"></div>
+                <div class="panelLeft3" id="testButtonPanel">
+                    <button id="testButton" class="testButton">TEST</button>
+                </div>
+                
+            </div> 
+            
+            </div>
+            <div class="panelLeft5" id="openButtonPanel">
+                <button class="openButton" id="openButton">
+                    OPEN
+                </button>
+            </div>
+            </div>
+            
+        </div>
+        <div class="divhide" id="4"></div>
+        <div class="divhide" id="5"></div>
+        <div class="divhide" id="6"></div>
+        <div class="divhide" id="7"></div>
+        <div class="divhide" id="8"></div>
+        
+    </div>
+    <div id="Right">
+        <div class="divhide" id="right1">
+            <div class="panelLeft1" id="rightPanel">
+                <div class="panelLeftUpper">
+                <div class="panelLeftConnectors">
+                    <div class="panelLeft2-1" id ="leftPanelMini1">
+                        <p class="writing">Maintenance Instructions: Connect portside ports in order via starboard ports. WARNING: Do not attempt manual repair, risk of electrocution.</p> 
+                    </div>
+                <div class="panelLeft2" id ="rightPanelMini1">
+                    <button id="a1" class="lightRed"></button>
+                    <button class="baseLight"></button>
+                    <button id="a2" class="lightOrange"></button>
+                </div>
+                <div class="panelLeft2" id ="rightPanelMini2">
+                    <button id="b1" class="lightOrange"></button>
+                    <button class="baseLight"></button>
+                    <button id="b2" class="lightRed"></button>
+                </div>
+                <div class="panelLeft2" id ="rightPanelMini3">
+                    <button id="c1" class="lightPurple"></button>
+                    <button class="baseLight"></button>
+                    <button id="c2" class="lightBlue"></button>
+                </div>
+                <div class="panelLeft2" id ="rightPanelMini4">
+                    <button id="d1" class="lightGreen"></button>
+                    <button class="baseLight"></button>
+                    <button id="d2" class="lightGreen"></button>
+                </div>
+                <div class="panelLeft2" id ="rightPanelMini5">
+                    <button id="e1" class="lightBlue"></button>
+                    <button class="baseLight"></button>
+                    <button id="e2" class="lightPurple"></button>
+                </div>
+                <div class="panelLeft2" id ="rightPanelMini6">
+                    <button id="f1" class="lightWhite"></button>
+                    <button class="baseLight"></button>
+                    <button id="f2" class="lightWhite"></button>
+                </div>
+                </div>
+            <div class="panelLeft4">
+                <div class="panelLeft3" id="c1">
+                    <button id="keyLight" class="keyLightBlue"></button>
+                </div>
+                <div style="height:22px"></div>
+                <div class="panelLeft3" id="c2">
+                    <p class="writing">Artemis Industries TRANSCEIVE-OTRON 150® <br>SN: 23-1-20-3-8-5-18<br>Signal Transducer <br> Model No. 2e-23a18n5d <br> Server No. 2e-1f18a9d<br>Patent No. US3041936A <br> MADE IN ELYSIUM</p>
+                </div>
+                
+            </div> 
+            
+            </div>
+            <div class="panelRight5" id="closeButtonPanel">
+                <button class="closeButton" id="closeButton">
+                    CLOSE
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+openB = document.getElementById("openButton");
+openB.onclick = async function(){
+        divhide("3");
+        divshow("right1");
+        change("testButton","buttonHide");
+        
+}
+closeB = document.getElementById("closeButton");
+closeB.onclick = async function(){
+        divhide("right1");
+        divshow("3");
+        change("testButton","testButton");
+}
+
+
+
+
+//Sleep function
+function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}
+
+//Hide/change class element functions
+function hide(ID){document.getElementById(ID).className = "invis";}
+function change(ID,Class) {document.getElementById(ID).className = Class;}
+function divhide(ID){document.getElementById(ID).className = "divhide";}
+function write(ID,text){document.getElementById(ID).innerText = text;}
+function divshow(ID){document.getElementById(ID).className = "divcenter";}
+function clearWrite(ID){document.getElementById(ID).innerText = "";}
+function clear(ID){document.getElementById(ID).innerHTML = "";hide(ID);}
+
+//Console Message Functions
+const show = document.getElementById("showConsole");
+let textHolder = "";
+show.onclick = function(){if (document.getElementById("msg").className === "txt1"){hideConsole();} else {showConsole();}}
+function showConsole(){change("msg","txt1");write("msg",textHolder)}
+function hideConsole(){change("msg","hidetext");clearWrite("msg");}
+function hideInput(){divhide("divCode");divhide("divEnter");document.getElementById("code").value="";}
+function showInput(){divshow("divCode");divshow("divEnter");}
+function clearInput(){document.getElementById("code").value="";}
+let typeSpeed = 75;
+let CursorBlinkSpeed = 400;let cursor = "|";
+let fast = false;
+const speed = document.getElementById("textSpeed");
+speed.onclick = function(){if(!fast){typeSpeed = 20;CursorBlinkSpeed = 150;write("textSpeed","Slower");fast=true;} else {typeSpeed = 75;CursorBlinkSpeed = 400;write("textSpeed","Faster");fast=false;}}
+
+
+async function cursorBlink(message,times){var i = times;document.getElementById("msg").className = "txt1";while (i > 0){document.getElementById("msg").innerText = message + cursor;await sleep(CursorBlinkSpeed);document.getElementById("msg").innerText = message;await sleep(CursorBlinkSpeed);i-=1;}}
+
+async function type(txt,prior = ""){
+    // console.log(document.getElementById("msg").innerText);
+
+    let message = prior;let s1 = txt;for (let x in s1){
+    // console.log(document.getElementById("msg").innerText);
+
+        if (s1[x] === "`" ) {
+            await cursorBlink(message,1);
+        } else if (s1[x] === "~"){
+            await cursorBlink(message,3);
+        } else if (s1[x] === "\\"){
+            message = clearmsg();
+            await sleep(1000)
+        }else if (s1[x] === "_"){
+            await sleep(typeSpeed);
+            message += "\n";
+            document.getElementById("msg").innerText = message + cursor;
+        } else if (s1[x] === "»"){ //alt-]
+            glitchMessage(s1[x]);
+        } else if (s1[x] === "«"){ //alt-[
+            glitchMessage(s1[x]);
+        }else if (s1[x] === "ß"){ //alt-s
+            glitchMessage(s1[x]);
+        }else if (s1[x] === "æ"){ //alt-z
+            glitchMessage(s1[x]);
+        }else if (s1[x] === "ð"){ //alt-d
+            glitchMessage(s1[x]);
+        }else {
+            await sleep(typeSpeed);
+            message += s1[x];
+            document.getElementById("msg").innerText = message + cursor;
+        }}
+        textHolder = message;
+        return message;
+    }
+function clearmsg(){document.getElementById("msg").className = "hidetext";return "";}
+async function glitchMessage(n){
+    if (n === "»"){
+        document.getElementById("msg").className = "glitch1";
+        await sleep(200);
+        document.getElementById("msg").className = "txt1";
+        await sleep(50);
+        document.getElementById("msg").className = "glitch1";
+        await sleep(100);
+        document.getElementById("msg").className = "txt1";
+    } else if (n === "«"){
+        document.getElementById("msg").className = "glitch2";
+        await sleep(200);
+        document.getElementById("msg").className = "txt1";
+    } else if (n === "ß"){
+        document.getElementById("msg").className = "glitch3";
+        await sleep(100);
+        document.getElementById("msg").className = "txt1";
+    } 
+    
+}
+//blinker control function
+let blinkerControl = 0
+document.getElementById("blinker").onclick = function() {blinkerControl = 1;};
+async function blinker(morseMessage){
+    let morse = morseMessage.split("");change("blinker","blink1");
+    while (blinkerControl === 0){for (let x in morse){if (blinkerControl === 1){break;}await sleep(200);if (morse[x] === "/") {await sleep(1200);} else if (morse[x] === " ") {await sleep(800);} else if (morse[x] === "-") {change("blinker","blink2");await sleep(800);change("blinker","blink1");} else if (morse[x] === ".") {change("blinker","blink2");await sleep(250);change("blinker","blink1");}}} change("blinker","blinkhide");await sleep(2000);hide("blinker");input();return false;}
+
+
+//document.getElementById("ID").onclick = function() {func()};
+//Generic Input Stuff
+step = 0
+answer0 = "CORRUPTION"; //Password to enter, usually
+answer1 = "";
+answer2 = "";
+answer3 = "";
+answer4 = "";
+answer5 = "";
+function input(){
+    let code = document.getElementById("code").value.toUpperCase();
+    // console.log("Input received");
+    // console.log(step)
+    if (step===0){
+        if (code === answer0){step1();}
+    } else if (step ===1){
+        if (code === answer1){step2();}
+    } else if (step ===2){
+        if (code === answer2){step3();}
+    } else if (step ===3){
+        if (code === answer3){step4();}
+    } else if (step ===4){
+        if (code === answer4){step5();}
+    } else if (step ===5){
+        if (code === answer5){step6();}
+    }
+    return false;
+}
+let blinkMessage = " "
+//!!! Remember to set 
+// document.getElementById("code").value = "";
+//After each input!!!
+function step0(){step=0;} //Initial Step, if there is one
+async function step1(){hideInput();divshow(1);change("blinker","blinkhide"); await sleep(2000);change("blinker","blink0"); await sleep(1000);blinkerControl = 0;blinker(blinkMessage);step=1;document.getElementById("code").value = "";} //First step, usually a blinker
+let text1 = ">~~_>_>_> ERROR_> ERROR_> ERROR_>_> ERROR: Transceiver Inoperative _>_> Reason: Internal Damage _>_> Damage Source:~ External Code Injection _>_> Damage Assessment: Critical, Immediate action required _>_> Calculating best recommended action.`.`.`_>_> Recommended action: initiate manual repairs _>_> Downloading repair guide.`.`.` _>_> ERROR: Repair guide unavailable _>`_>`_>` Good luck... ";
+async function step2(){divhide("1");showConsole();change("textSpeed","consoleButton");await type(text1);await sleep(1000);step=2;hideConsole();change("showConsole","consoleButton");await sleep(1000);step3();}
+async function step3(){divshow("3");step=3;}
+async function step4(){step=4;} 
+async function step5(){step=5;}
+let text2 = "\\>~_> Testing transceiver`.`.`.`_>_> Transceiver Status: Operational. ~ _>_> GENERATING NEW PASS CODE ____******************************__******************************__********** H`O`T`W`I`R`E ***********__******************************__******************************~~__.";
+async function step6(){
+    // console.log(document.getElementById("msg").innerText);
+    step=6;
+    let ml = ["right1","rightPanel","Right","3"]
+    clearmsg();
+    for (let x in ml){
+        divhide(ml[x]);
+    }
+    // console.log(document.getElementById("msg").innerText);
+    hideInput();showConsole();
+    await sleep(2000);
+    // console.log(document.getElementById("msg").innerText);
+type(text2);}
+
+
+class KeyLight {
+    constructor(name,color){
+        this.name = name;
+        this.color = color;
+        let n = this.name;
+        let c = "keyLight"+this.color;
+        change(n,c);
+    }
+    get col(){
+        return this.color;
+    }
+    newColor(col){
+        this.color = col;
+        let n = this.name;
+        let c = "keyLight"+this.color;
+        change(n,c);
+    }
+}
+let keyLight = new KeyLight("keyLight","White");
+
+class wireButton {
+    constructor(name,color){
+        this.name = name;
+        this.color = color;
+        
+        change(this.name,("light"+this.color));
+        
+    }
+    click(){
+        let newCol = keyLight.col;
+        keyLight.newColor(this.color);
+        this.color = newCol;
+        change(this.name,("light"+this.color));
+    }
+    connectedTo(){
+        let c = this.color;
+        // console.log(c);
+        if (c==="Red"){
+            return "A1";
+        } else if (c==="Orange") {
+            return "B1";
+        } else if (c==="Purple") {
+            return "C1";
+        } else if (c==="Green") {
+            return "D1";
+        } else if (c==="Blue") {
+            return "E1";
+        } else if (c==="White") {
+            return "F1";
+        }
+    }
+}
+
+
+
+let a2 = new wireButton("a2","Purple"); 
+let b2 = new wireButton("b2","Blue");
+let c2 = new wireButton("c2","Green");
+let d2 = new wireButton("d2","Orange");
+let e2 = new wireButton("e2","Red");
+let f2 = new wireButton("f2","Orange");
+
+function right(b,c){
+    change(b+"1","onLightGood");
+    change(b+"2","onLightGood");
+    change(c,"onLightGood")
+}
+
+
+function wrong(b,c){
+    change(b+"1","onLightBad");
+    change(b+"2","onLightBad");
+    
+    change(c,"onLightBad")
+}
+async function tester(b,testee,color){
+    // console.log(testee.name,testee.color,color)
+    if (testee.color === color){
+        right(b,testee.connectedTo());
+        await sleep(testTime*3)
+        return true;
+    } 
+    wrong(b,testee.connectedTo());
+    await sleep(testTime*3)
+    return false;
+}
+let testTime = 800
+async function testOn(a,b,c){
+    change(a,"onLightTest");
+    await sleep(testTime);
+    change(b,"onLightTest");
+    await sleep(testTime+200);
+    // console.log(c,c.connectedTo())
+    change(c.connectedTo(),"onLightTest")
+    await sleep(testTime);
+
+}
+
+function turnOff(){
+    change("A1","offLight");change("A2","offLight");
+    change("B1","offLight");change("B2","offLight");
+    change("C1","offLight");change("C2","offLight");
+    change("D1","offLight");change("D2","offLight");
+    change("E1","offLight");change("E2","offLight");
+    change("F1","offLight");change("F2","offLight");
+}
+
+function isCorrect(c){
+    for (let x in c){
+        // console.log(c[x],!c[x]);
+        if(!c[x]){
+            return false;
+        }
+    }
+    return true;
+}
+async function testSolution(){
+    // console.log(document.getElementById("msg").innerText);
+    turnOff();
+    // console.log("testing");
+
+    let correct = [false,false,false,false,false,false];
+    await sleep(100);
+    change("testLight","testLightYellow");
+    await sleep(testTime);
+    await testOn("A1","A2",a2);
+    correct[0] = await tester("A",a2,"White");
+    await sleep(testTime);
+    await testOn("B1","B2",b2);
+    correct[1] = await tester("B",b2,"Purple");
+    await sleep(testTime);
+    await testOn("C1","C2",c2);
+    correct[2] = await tester("C",c2,"Blue");
+    await sleep(testTime);
+    await testOn("D1","D2",d2);
+    correct[3] = await tester("D",d2,"Red");
+    await sleep(testTime);
+    await testOn("E1","E2",e2);
+    correct[4] = await tester("E",e2,"Green");
+    await sleep(testTime);
+    await testOn("F1","F2",f2);
+    correct[5] = await tester("F",f2,"Orange");
+    await sleep(testTime);
+    // console.log(correct);
+    // console.log(document.getElementById("msg").innerText);
+
+    if(isCorrect(correct)){
+        change("testLight","testLightGreen");
+        await sleep(2000);
+        return true;
+    } else {
+        change("testLight","testLightRed");
+        await sleep(1200);
+        change("testLight","testLightOff");
+        await sleep(400);
+        change("testLight","testLightRed");
+        await sleep(400);
+        change("testLight","testLightOff");
+        await sleep(400);
+        change("testLight","testLightRed");
+        await sleep(400);
+        change("testLight","testLightOff");
+        await sleep(400);
+        change("testLight","testLightRed");
+        await sleep(400);
+        change("testLight","testLightOff");
+        await sleep(400);
+        change("testLight","testLightRed");
+        
+        
+        return false;
+    }
+
+}
+
+document.getElementById("a2").onclick = function() {a2.click()};
+document.getElementById("b2").onclick = function() {b2.click()};
+document.getElementById("c2").onclick = function() {c2.click()};
+document.getElementById("d2").onclick = function() {d2.click()};
+document.getElementById("e2").onclick = function() {e2.click()};
+document.getElementById("f2").onclick = function() {f2.click()};
+document.getElementById("testButton").onclick = async function() {
+    if(await testSolution()){
+        // console.log(document.getElementById("msg").innerText);
+
+        step6();
+    }
+};
+
+
+
+
+
+</script>

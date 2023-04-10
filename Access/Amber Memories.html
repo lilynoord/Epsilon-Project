@@ -1,0 +1,184 @@
+<style>
+.divcentertxt {margin:auto;vertical-align: middle;display: flex;justify-content: left;align-items: center;background-color:black;padding:10px 10px}
+.divcenter {margin:auto;vertical-align: middle;display: flex;justify-content: center;align-items: center;background-color:black; padding:2px 2px}
+.divhide {opacity:0;transition-duration:1s;margin:auto;vertical-align: middle;display: flex;justify-content: center;align-items: center;}
+.divhidetxt {opacity:0;transition-duration:1s;margin:auto;vertical-align: middle;display: flex;justify-content: left;align-items: center;}
+.input{margin:auto;opacity:1;transition-duration:1s}
+.invis{margin:-10px -10px;opacity:0;transition-duration:0.5s}
+.hidetext {font-family:"Courier New", monospace;opacity:0;transition-duration:1s;height:0px;} 
+.txt1 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;transition-duration: 1s;}
+.glitch1 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-style: italic;}
+.glitch2 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-stretch: ultra-condensed;}
+.glitch3 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-stretch: ultra-expanded ;}
+.glitch4 {margin:1px 1px;opacity:1;color:rgba(255, 0, 191, 0.384);font-family:"Courier New", monospace;}
+.glitch5 {margin:1px 1px;opacity:1;color:white;font-family:"OCR A Std", monospace}
+.txtBig {margin:auto;opacity:1;color:white;font-family:"Courier New", monospace;transition-duration: 0.8s;font-size:80px}
+.blink0 {margin:auto;background-color: #383838;border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 1s;cursor: pointer;opacity:.8;}
+.blink1 {margin:auto;background-color: #383838;border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 0.3s;cursor: pointer;opacity:.8;}
+.blink2 {margin:auto;background-color: #f0ba08d3;box-shadow: 0 0px 16px 0 #ab8f00bf, 0 6px 20px 0 #ab8f002a;border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 0.3s;cursor: pointer;}
+.blinkhide{margin:auto;background-color: #383838;box-shadow: 0 0px 16px 0 rgba(200,0,0,0.6), 0 6px 20px 0 rgba(200,0,0,0.58);border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 2s;cursor: pointer;opacity:0}
+.consoleButton {background-color: black;color:white;opacity:1;
+}
+</style>
+<div style="background-color: black";="MasterDiv">
+    <button id = "showConsole" class="invis">Console</button>
+    <button id = "textSpeed" class="invis">Faster</button>
+    <div id="Left">
+        <div class="divcentertxt" id="console">
+            <p class="hidetxt" id="msg"></p>
+        </div>
+        <div class="divhide" id="1">
+            <button class="invis" id="blinker"></button>
+        </div>
+        <div class="divhide" id="2"></div>
+        <div class="divhide" id="3"></div>
+        <div class="divhide" id="4"></div>
+        <div class="divhide" id="5"></div>
+        <div class="divhide" id="6"></div>
+        <div class="divhide" id="7"></div>
+        <div class="divhide" id="8"></div>
+        <div class="divcenter" id="divCode">
+            <input class="input" type="text" id="code" name="code">
+        </div>
+        <div class="divcenter" id="divEnter">
+            <form onsubmit="return input();"><input class="input" type="submit" id="enter" value="X"></form>
+        </div>
+    <div class="divcenter" id="Right"></div>
+
+</div>
+
+
+<script>
+
+//Sleep function
+function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}
+
+//Hide/change class element functions
+function hide(ID){document.getElementById(ID).className = "invis";}
+function change(ID,Class) {document.getElementById(ID).className = Class;}
+function divhide(ID){document.getElementById(ID).className = "divhide";}
+function write(ID,text){document.getElementById(ID).innerText = text;}
+function divshow(ID){document.getElementById(ID).className = "divcenter";}
+function clearWrite(ID){document.getElementById(ID).innerText = "";}
+function clear(ID){document.getElementById(ID).innerHTML = "";hide(ID);}
+
+//Console Message Functions
+const show = document.getElementById("showConsole");
+let textHolder = "";
+show.onclick = function(){if (document.getElementById("msg").className === "txt1"){hideConsole();} else {showConsole();}}
+function showConsole(){change("msg","txt1");write("msg",textHolder)}
+function hideConsole(){change("msg","hidetext");clearWrite("msg");}
+function hideInput(){divhide("divCode");divhide("divEnter");document.getElementById("code").value="";}
+function showInput(){divshow("divCode");divshow("divEnter");}
+function clearInput(){document.getElementById("code").value="";}
+let typeSpeed = 75;
+let CursorBlinkSpeed = 400;let c = "|";
+let fast = false;
+const speed = document.getElementById("textSpeed");
+speed.onclick = function(){if(!fast){typeSpeed = 20;CursorBlinkSpeed = 150;write("textSpeed","Slower");fast=true;} else {typeSpeed = 75;CursorBlinkSpeed = 400;write("textSpeed","Faster");fast=false;}}
+
+
+async function cursorBlink(message,times){var i = times;document.getElementById("msg").className = "txt1";while (i > 0){document.getElementById("msg").innerText = message + c;await sleep(CursorBlinkSpeed);document.getElementById("msg").innerText = message;await sleep(CursorBlinkSpeed);i-=1;}}
+
+async function type(txt,prior = ""){
+    let message = prior;let s1 = txt;for (let x in s1){
+        if (s1[x] === "`" ) {
+            await cursorBlink(message,1);
+        } else if (s1[x] === "~"){
+            await cursorBlink(message,3);
+        } else if (s1[x] === "\\"){
+            message = clearmsg();
+            await sleep(1000)
+        }else if (s1[x] === "_"){
+            await sleep(typeSpeed);
+            message += "\n";
+            document.getElementById("msg").innerText = message + c;
+        } else if (s1[x] === "»"){ //alt-]
+            glitchMessage(s1[x]);
+        } else if (s1[x] === "«"){ //alt-[
+            glitchMessage(s1[x]);
+        }else if (s1[x] === "ß"){ //alt-s
+            glitchMessage(s1[x]);
+        }else if (s1[x] === "æ"){ //alt-z
+            glitchMessage(s1[x]);
+        }else if (s1[x] === "ð"){ //alt-d
+            glitchMessage(s1[x]);
+        }else {
+            await sleep(typeSpeed);
+            message += s1[x];
+            document.getElementById("msg").innerText = message + c;
+        }}
+        textHolder = message;
+        return message;
+    }
+function clearmsg(){document.getElementById("msg").className = "hidetext";return "";}
+async function glitchMessage(n){
+    if (n === "»"){
+        document.getElementById("msg").className = "glitch1";
+        await sleep(200);
+        document.getElementById("msg").className = "txt1";
+        await sleep(50);
+        document.getElementById("msg").className = "glitch1";
+        await sleep(100);
+        document.getElementById("msg").className = "txt1";
+    } else if (n === "«"){
+        document.getElementById("msg").className = "glitch2";
+        await sleep(200);
+        document.getElementById("msg").className = "txt1";
+    } else if (n === "ß"){
+        document.getElementById("msg").className = "glitch3";
+        await sleep(100);
+        document.getElementById("msg").className = "txt1";
+    } 
+    
+}
+//blinker control function
+let blinkerControl = 0
+document.getElementById("blinker").onclick = function() {blinkerControl = 1;};
+async function blinker(morseMessage){
+    let morse = morseMessage.split("");change("blinker","blink1");
+    while (blinkerControl === 0){for (let x in morse){if (blinkerControl === 1){break;}await sleep(200);if (morse[x] === "/") {await sleep(1200);} else if (morse[x] === " ") {await sleep(800);} else if (morse[x] === "-") {change("blinker","blink2");await sleep(800);change("blinker","blink1");} else if (morse[x] === ".") {change("blinker","blink2");await sleep(250);change("blinker","blink1");}}} change("blinker","blinkhide");await sleep(2000);hide("blinker");input();return false;}
+
+
+//document.getElementById("ID").onclick = function() {func()};
+//Generic Input Stuff
+step = 0
+answer0 = "AMBER MEMORIES"; //Password to enter, usually
+answer1 = "";
+answer2 = "";
+answer3 = "";
+answer4 = "";
+answer5 = "";
+function input(){
+    let code = document.getElementById("code").value.toUpperCase();
+    console.log("Input received");
+    console.log(step)
+    if (step===0){
+        if (code === answer0){step1();}
+    } else if (step ===1){
+        if (code === answer1){step2();}
+    } else if (step ===2){
+        if (code === answer2){step3();}
+    } else if (step ===3){
+        if (code === answer3){step4();}
+    } else if (step ===4){
+        if (code === answer4){step5();}
+    } else if (step ===5){
+        if (code === answer5){step6();}
+    }
+    return false;
+}
+let blinkMessage = ". "
+//!!! Remember to set 
+// document.getElementById("code").value = "";
+//After each input!!!
+function step0(){step=0;} //Initial Step, if there is one
+async function step1(){hideInput();divshow(1);change("blinker","blinkhide"); await sleep(2000);change("blinker","blink0"); await sleep(1000);blinkerControl = 0;blinker(blinkMessage);step=1;document.getElementById("code").value = "";} //First step, usually a blinker
+let text1 = "_>~~ Receiving encrypted transmission~~ _>_>~ Access code requested~ _>_>~ Entering access code»: ~[ACCESS CODE MISSING]~_>_>` Code accepted~_>_>` Beginning recorded message`.`.`.`\\[MESSAGE MISSING]_~~~>`_>`_>`_>`~ Transmission paused.~~";
+async function step2(){divhide("1");showConsole();change("textSpeed","consoleButton");await type(text1);await sleep(1000);step=2;hideConsole();change("showConsole","consoleButton");await sleep(1000);step3();}
+async function step3(){step=3;}
+async function step4(){step=4;}
+async function step5(){step=5;}
+let text2 = ">~~~ Resume transmission.`.`.`.`\\[TRANSMISSION MISSING]__******************************__******************************__********** [`M`I`S`S`I`N`G`] ***********__******************************__******************************~~__.";
+async function step6(){divhide("4");divhide("5");hideInput();clearmsg();await sleep(2000);type(text2);step=6;}
+</script>

@@ -1,0 +1,60 @@
+<style>
+    .t {
+        color: white;
+        background-color: black;
+    }
+</style>
+<script>
+    let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    let length = alphabet.length;
+function caesarCipher(str,key) {
+return str.toUpperCase().replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0)-65 + key ) % 26 + 65));
+}
+
+    function CeasarDecipher() {
+        var key = document.getElementById("key").value;
+        var phrase = document.getElementById("phrase").value.toUpperCase();
+        phrase = phrase.split("");
+        let decrypt = "";
+        for (let x in phrase) {
+            if (alphabet.includes(phrase[x])) {
+                var n = alphabet.indexOf(phrase[x]);
+                var nm = Number(n) + Number(key);
+                if (nm > 25) {
+                    nm = nm % 26
+                } else if (nm < 0) {
+                    nm = 25 + (nm % 25);
+                }
+                if (alphabet[nm]===undefined){
+                    alert(nm);
+                }
+
+                decrypt += alphabet[nm];
+            } else {
+                decrypt += phrase[x];
+            }
+        }
+        document.getElementById("decrypted").innerText = decrypt;
+        return false;
+
+    }
+
+function b(){
+    var key = document.getElementById("key").value;
+    var str = document.getElementById("phrase").value.toUpperCase();
+    let decrypt = caesarCipher(str,key);
+    document.getElementById("decrypted").innerText = decrypt;
+    return false;
+}
+</script>
+<h3 class="t">abc=xyz</h3>
+<div style="display:flex;align-items:left">
+    <input style="width:20px;margin:0px 1px;" type="text" id="key" name="key">
+    <input type="text" id="phrase" name="phrase"><br><br>
+</div>
+<form onsubmit="return b();" class="my-form">
+    <input type="submit" value="X">
+</form>
+
+
+<p class="t" id="decrypted"></p>

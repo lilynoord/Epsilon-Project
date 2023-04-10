@@ -1,0 +1,185 @@
+<style>
+.divcentertxt {margin:auto;vertical-align: middle;display: flex;justify-content: left;align-items: center;background-color:black;padding:10px 10px}
+.divcenter {margin:auto;vertical-align: middle;display: flex;justify-content: center;align-items: center;background-color:black; padding:2px 2px;transition-duration: 2s;}
+.divhide {opacity:0;transition-duration:2s;margin:auto;vertical-align: middle;display: flex;justify-content: center;align-items: center;}
+.divhidetxt {opacity:0;transition-duration:1s;margin:auto;vertical-align: middle;display: flex;justify-content: left;align-items: center;}
+.input{margin:auto;opacity:1;transition-duration:1s}
+.invis{margin:-10px -10px;opacity:0;transition-duration:0.5s}
+.hidetext {font-family:"Courier New", monospace;opacity:0;transition-duration:1s;height:0px;} 
+.txt1 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;transition-duration: 1s;}
+.glitch1 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-style: italic;}
+.glitch2 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-stretch: ultra-condensed;}
+.glitch3 {margin:1px 1px;opacity:1;color:white;font-family:"Courier New", monospace;font-stretch: ultra-expanded ;}
+.glitch4 {margin:1px 1px;opacity:1;color:rgba(255, 0, 191, 0.384);font-family:"Courier New", monospace;}
+.glitch5 {margin:1px 1px;opacity:1;color:white;font-family:"OCR A Std", monospace}
+.txtBig {margin:auto;opacity:1;color:white;font-family:"Courier New", monospace;transition-duration: 0.8s;font-size:80px}
+.blink0 {margin:auto;background-color: #383838;border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 1s;cursor: pointer;opacity:.8;}
+.blink1 {margin:auto;background-color: #383838;border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 0.3s;cursor: pointer;opacity:.8;}
+.blink2 {margin:auto;background-color: #d60012;box-shadow: 0 0px 16px 0 rgba(200,0,0,0.6), 0 6px 20px 0 rgba(200,0,0,0.58);border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 0.3s;cursor: pointer;}
+.blinkhide{margin:auto;background-color: #383838;box-shadow: 0 0px 16px 0 rgba(200,0,0,0.6), 0 6px 20px 0 rgba(200,0,0,0.58);border: 1px solid grey;padding: 32px 32px;border-radius: 50%;transition-duration: 2s;cursor: pointer;opacity:0}
+.consoleButton {background-color: black;color:white;opacity:1;
+}
+.button {
+    margin:10px 5px;background-color: #000000;border: 2px solid grey;padding:30px;border-radius: 50%;transition-duration: 2s;cursor: pointer;opacity:.8;color:white;
+} 
+.button:active {
+    margin:15%;background-color: #0c00b5c4;border: 1px solid rgb(255, 255, 255);padding:40%;border-radius: 50%;transition-duration: 0.1s;cursor: pointer;opacity:.8;box-shadow: 2px 0px 20px 0 rgba(44, 4, 54, 1), 0 0px 30px 0 rgba(255, 255, 255, 0.58);
+}
+
+.code{
+    margin:1px 1px;opacity:1;
+    color:#ffffff;font-family:"Courier New", monospace;transition-duration: 1s;
+    font-size:200%;
+}
+</style>
+<div style="background-color: black";="MasterDiv">
+    <div id="Left">
+        <div class="divcenter" id="a">
+            <p id="code" class="code"></p>
+            
+        </div>
+        <div class="divcenter" id="c">
+            <p id="secret" class="code"></p>
+        </div>
+        <div class="divcenter" id="b">
+            
+            <table>
+                <tbody>
+                    <tr>
+                    <td><button id="1"class="button"></button></td>
+                    <td><button id="2"class="button"></button></td>
+                    <td><button id="3"class="button"></button></td>
+                    </tr>
+                    <tr>
+                    <td><button id="4"class="button"></button></td>
+                    <td><button id="5"class="button"></button></td>
+                    <td><button id="6"class="button"></button></td>
+                    </tr>
+                    <tr>
+                    <td><button id="7"class="button"></button></td>
+                    <td><button id="8"class="button"></button></td>
+                    <td><button id="9"class="button"></button></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+        </div>
+
+        
+    
+
+</div>
+
+
+<script>
+
+//Sleep function
+function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}
+
+//Hide/change class element functions
+function hide(ID){document.getElementById(ID).className = "invis";}
+function change(ID,Class) {document.getElementById(ID).className = Class;}
+function divhide(ID){document.getElementById(ID).className = "divhide";}
+function write(ID,text){document.getElementById(ID).innerText = text;}
+function divshow(ID){document.getElementById(ID).className = "divcenter";}
+function clearWrite(ID){document.getElementById(ID).innerText = "";}
+
+
+//blinker control function
+
+
+//document.getElementById("ID").onclick = function() {func()};
+//Generic Input Stuff
+step = 0
+answer0 = ""; //Password to enter, usually
+answer1 = "7328";
+answer2 = "4791";
+answer3 = "6332";
+answer4 = "1756";
+answer5 = "8637";
+
+document.getElementById("1").onclick = function() {func("1")};
+document.getElementById("2").onclick = function() {func("2")};
+document.getElementById("3").onclick = function() {func("3")};
+document.getElementById("4").onclick = function() {func("4")};
+document.getElementById("5").onclick = function() {func("5")};
+document.getElementById("6").onclick = function() {func("6")};
+document.getElementById("7").onclick = function() {func("7")};
+document.getElementById("8").onclick = function() {func("8")};
+document.getElementById("9").onclick = function() {func("9")};
+
+let codes = "";
+showCode = ""
+write("code",codes);
+async function func(n){
+    
+    codes += n
+    showCode += "*"
+    write("code",showCode);
+    if (codes.length === 4){
+        if (codes === answer1){
+            revealSecret(">~~ AZURE WORLDS");
+        } else if (codes === answer2){
+            revealSecret("?~~ EMERALD CITIES");
+        } else if (codes === answer3){
+            revealSecret(":~~ CRIMSON EYES");
+        } else if (codes === answer4){
+            revealSecret("@~~ AMBER MEMORIES");
+        } else if (codes === answer5){
+            revealSecret("%~~ IVORY LIES");
+        } else {
+            await sleep(300);
+            codes="";
+            showCode = "";
+            write("code","\n");
+        } 
+        
+    }
+}
+
+
+let typeSpeed = 200;
+let CursorBlinkSpeed = 400;
+let c = "|";
+
+async function cursorBlink(message,times){var i = times;while (i > 0){document.getElementById("secret").innerText = message + c;await sleep(CursorBlinkSpeed);document.getElementById("secret").innerText = message;await sleep(CursorBlinkSpeed);i-=1;}}
+
+async function type(txt,prior = ""){
+    let message = prior;let s1 = txt;for (let x in s1){
+        if (s1[x] === "`" ) {
+            await cursorBlink(message,1);
+        } else if (s1[x] === "~"){
+            await cursorBlink(message,3);           
+        
+        }else {
+            await sleep(typeSpeed);
+            message += s1[x];
+            document.getElementById("secret").innerText = message + c;
+        }}
+        document.getElementById("secret").innerText = message
+        return message;
+    }
+write("code","\n");
+async function revealSecret(secret){
+    write("secret","");
+    await sleep(200); 
+    divhide("a"); 
+    divhide("b");
+    divshow("c");
+    let text = "";
+    await sleep(3000);
+    await type(secret);
+    await sleep(5000);
+    divhide("c");
+    await sleep(2000);
+    codes="";
+    showCode = "";
+    write("code","\n");
+    text="";
+    write("secret","");
+    divshow("a");
+    divshow("b");
+}
+
+</script>

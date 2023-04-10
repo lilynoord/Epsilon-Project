@@ -1,0 +1,67 @@
+<style>
+    .t {
+        color: white;
+        background-color: black;
+    } 
+</style>
+<script>
+    function mod(n, p) {
+  return n - p * Math.floor(n / p);
+}
+let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+function getNum(c, n){
+
+    if (n > 0){
+        i = 0;
+     
+        while (i < n){
+            i +=1 ;
+            c += 1;
+            if (c>alphabet.length-1){
+                c = 0;
+            }
+        }
+    } else if (n < 0){
+        i = 0
+        while (i > n){
+            i -= 1;
+            c -=1;
+            if (c<0){
+                c=alphabet.length-1;
+            }
+        }
+    }
+    return c;
+}
+
+
+function b(){
+    var key = document.getElementById("key").value;
+    var str = document.getElementById("phrase").value.toUpperCase();
+    let decrypt = encrypt(str,key);
+    document.getElementById("decrypted").innerText = decrypt;
+    return false;
+}
+function encrypt(str,key){
+    d = ""
+    c = 0
+    for (let i in str){
+        c = alphabet.indexOf(str[i]);
+        c = getNum(c,key);
+        d += alphabet[c];
+    }
+    return d;
+}
+</script>
+
+<h3 class="t">abc=xyz</h3>
+<div style="display:flex;align-items:left">
+    <input style="width:20px;margin:0px 1px;" type="text" id="key" name="key">
+    <input type="text" id="phrase" name="phrase"><br><br>
+</div>
+<form onsubmit="return b();" class="my-form">
+    <input type="submit" value="X">
+</form>
+
+
+<p class="t" id="decrypted"></p>
